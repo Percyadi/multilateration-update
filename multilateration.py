@@ -22,3 +22,8 @@ def calc_errors(position, anchors, distances):
     return errors
 
 print(calc_errors((2,2), ANCHORS, distances))
+
+def position_error(actual, estimated):
+    error_distance = distance(actual, estimated)
+
+    return error_distance

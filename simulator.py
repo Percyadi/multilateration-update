@@ -69,5 +69,12 @@ for name, anchor in ANCHORS.items():
     rssi = simulate_rssi(anchor, target, walls)
     estimated_distance = rssi_to_distance(rssi)
 
-    print(name, "RSSI:", rssi, "Estimated distanace:", estimated_distance)
+    print(name, rssi, estimated_distance)
 
+def rssi_to_distance_wall_aware(rssi, wall_count, rssi_at_1=-40, path_loss=2.2, wall_loss=5):
+    total_wall_loss = wall_count*wall_loss
+    d = 10**((rssi_at_1 - rssi - total_wall_loss)/(10*path_loss))
+
+    return d
+
+print(rssi_to_distance_wall_aware(-60.37734009539241, 1))

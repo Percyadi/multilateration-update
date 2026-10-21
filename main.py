@@ -4,6 +4,8 @@ from simulator import simulate_rssi
 from geometry import count_walls, distance
 from localization import rssi_to_distance_wall_aware, rssi_to_distance
 from measurement import Measurement
+from multilateration import estimate_position, position_error,calc_errors
+
 
 signal_points = []
 
@@ -28,8 +30,20 @@ for m in signal_points:
     print()
 
 
+distances = {
+    "A1": 3.6055,
+    "A2": 3.6055,
+    "A3": 5.0,
+    "A4": 5.0
+}
 
+estimated = estimate_position(ANCHORS, distances)
+actual = target
+error = position_error(actual, estimated)
 
+print("Estimated position:", estimated)
+print("Actual position:", actual)
+print("Position error:", error)
 
 # candidate = (2,2)
 
@@ -50,3 +64,5 @@ for m in signal_points:
 #     return errors
 
 # print(calc_errors((2,2), ANCHORS, distances))
+#imported all the functions from multilateration
+#using distance dictionary found out estiamted position, actual position and position error and printed it 

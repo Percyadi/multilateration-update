@@ -6,13 +6,13 @@ from measurement import Measurement
 from multilateration import estimate_position, position_error,calc_errors
 
 
-signal_points = []
 
 # measurement array
 measurement_array = []
 
 # Collects simulated RSSI and distance measurements for all anchors.
 for i in range(15):
+    signal_points = []
     for name, anchor in ANCHORS.items():
         wall_count = count_walls(anchor, target, walls)
         wall_aware_rssi = simulate_rssi(anchor, target, walls)

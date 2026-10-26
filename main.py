@@ -1,4 +1,3 @@
-# config has defination of sources and walls
 from config import ANCHORS, target, walls
 from simulator import simulate_rssi
 from geometry import count_walls, distance
@@ -9,6 +8,7 @@ from multilateration import estimate_position, position_error,calc_errors
 
 signal_points = []
 
+# Collects simulated RSSI and distance measurements for all anchors.
 for name, anchor in ANCHORS.items():
     wall_count = count_walls(anchor, target, walls)
     wall_aware_rssi = simulate_rssi(anchor, target, walls)
@@ -24,25 +24,19 @@ for name, anchor in ANCHORS.items():
     )
     signal_points.append(m)
 
-
+# Prints each signal measurement
 for m in signal_points:
     print(m)
     print()
 
 
-#Building the distance dictionary
+# Building the distance dictionary
 distances = {}
 
 for m in  signal_points:
     distances[m.name]=m.wall_aware_distance
 
-# distances = {
-#     "A1": 3.6055,
-#     "A2": 3.6055,
-#     "A3": 5.0,
-#     "A4": 5.0
-# }
-
+# Estimates position and calculates the error against the actual target.
 estimated = estimate_position(ANCHORS, distances)
 actual = target
 error = position_error(actual, estimated)

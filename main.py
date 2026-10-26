@@ -5,6 +5,19 @@ from localization import rssi_to_distance_wall_aware, rssi_to_distance
 from measurement import Measurement
 from multilateration import estimate_position, position_error,calc_errors
 
+n_samples = 15  
+
+rssi_samples = {}  #{"A1": [15 values], ....}
+
+for name, anchor in ANCHORS.items():
+    samples = [] # list of values
+
+    for i in range (n_samples):
+        rssi = simulate_rssi(anchor, target, walls)
+        samples.append(rssi)
+
+    rssi_samples[name] = samples
+
 
 
 # measurement array

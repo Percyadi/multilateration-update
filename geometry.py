@@ -1,10 +1,12 @@
 import math
 
+# Finds Distance. 
 def distance(pt1, pt2):
     dist = math.dist(pt1, pt2)
 
     return dist
 
+# Checks if three points are in a counter-clockwise orientation.
 def ccw(A, B, C):
     x1, y1 = A
     x2, y2 = B
@@ -14,6 +16,7 @@ def ccw(A, B, C):
         return True
     else: return False
 
+# Checks if two line segments intersect.
 def segments_intersect(A, B, C, D):
 
     if((ccw(A,C,D) != ccw(B,C,D)) and (ccw(A,B,C) != ccw(A,B,D))):
@@ -21,6 +24,7 @@ def segments_intersect(A, B, C, D):
 
     else: return False
 
+# Counts the number of walls intersecting the path between anchor and target.
 def count_walls(anchor, target, walls):
     wall_count = 0
     for i in range(len(walls)):

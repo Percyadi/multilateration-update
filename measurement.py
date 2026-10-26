@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+# store and format RSSI and distance measurements
+
 @dataclass
 class Measurement:
     name: str

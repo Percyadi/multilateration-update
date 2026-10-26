@@ -7,6 +7,6 @@ def simulate_rssi(anchor, target, walls, noise_std=noise_std):
     dist_anchor_target = distance(anchor, target)
     sim_count_walls =  count_walls(anchor, target, walls)
     rssi = distance_to_rssi(dist_anchor_target, sim_count_walls)
-
-    return random.gauss(rssi, noise_std)
+    noisy_rssi = random.gauss(rssi, noise_std)
+    return noisy_rssi
 

@@ -8,21 +8,26 @@ from multilateration import estimate_position, position_error,calc_errors
 
 signal_points = []
 
-# Collects simulated RSSI and distance measurements for all anchors.
-for name, anchor in ANCHORS.items():
-    wall_count = count_walls(anchor, target, walls)
-    wall_aware_rssi = simulate_rssi(anchor, target, walls)
-    basic_rssi = simulate_rssi(anchor, target, [])
+# measurement array
+measurement_array = []
 
-    m = Measurement(
-        name=name,
-        wall_count=wall_count,
-        wall_aware_rssi=wall_aware_rssi,
-        basic_rssi=basic_rssi,
-        wall_aware_distance=rssi_to_distance_wall_aware(wall_aware_rssi, wall_count),
-        basic_distance=rssi_to_distance(wall_aware_rssi),
-    )
-    signal_points.append(m)
+# Collects simulated RSSI and distance measurements for all anchors.
+for i in range(15):
+    for name, anchor in ANCHORS.items():
+        wall_count = count_walls(anchor, target, walls)
+        wall_aware_rssi = simulate_rssi(anchor, target, walls)
+        basic_rssi = simulate_rssi(anchor, target, [])
+
+        m = Measurement(
+            name=name,
+            wall_count=wall_count,
+            wall_aware_rssi=wall_aware_rssi,
+            basic_rssi=basic_rssi,
+            wall_aware_distance=rssi_to_distance_wall_aware(wall_aware_rssi, wall_count),
+            basic_distance=rssi_to_distance(wall_aware_rssi),
+        )
+        signal_points.append(m)
+    measurement_array.append(signal_points) # append the subarrays(signal_points) to the master array(measurement_array)
 
 # Prints each signal measurement
 for m in signal_points:
@@ -33,8 +38,9 @@ for m in signal_points:
 # Building the distance dictionary
 distances = {}
 
-for m in  signal_points:
-    distances[m.name]=m.wall_aware_distance
+for m in  measurement_array:  # iterating through the master array
+        for i in m:  # iterating through the sub array
+            distances[i.name]=i.wall_aware_distance
 
 # Estimates position and calculates the error against the actual target.
 estimated = estimate_position(ANCHORS, distances)
@@ -44,4 +50,3 @@ error = position_error(actual, estimated)
 print("Estimated position:", estimated)
 print("Actual position:", actual)
 print("Position error:", error)
-

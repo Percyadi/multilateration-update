@@ -1,7 +1,5 @@
-from config import ANCHORS, target, walls
-from simulator import simulate_rssi
-from geometry import count_walls, distance
-from localization import rssi_to_distance_wall_aware, rssi_to_distance
+
+from geometry import distance
 from scipy.optimize import least_squares
 
 distances = {

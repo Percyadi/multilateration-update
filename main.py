@@ -29,13 +29,15 @@ for m in signal_points:
     print(m)
     print()
 
+distance = {}
 
-distances = {
-    "A1": 3.6055,
-    "A2": 3.6055,
-    "A3": 5.0,
-    "A4": 5.0
-}
+
+# distances = {
+#     "A1": 3.6055,
+#     "A2": 3.6055,
+#     "A3": 5.0,
+#     "A4": 5.0
+# }
 
 estimated = estimate_position(ANCHORS, distances)
 actual = target
@@ -45,24 +47,3 @@ print("Estimated position:", estimated)
 print("Actual position:", actual)
 print("Position error:", error)
 
-# candidate = (2,2)
-
-
-# candidate_distance  = distance(candidate, ANCHORS["A1"])
-
-# error = candidate_distance - distances["A1"]
-
-# errors = []
-
-# def calc_errors(position, anchors, distances):
-#     errors = []
-#     for name, anchor in anchors.items():
-#         candidate_distance = distance(candidate, anchor)
-#         error = candidate_distance - distances[name]
-#         errors.append(error)
-
-#     return errors
-
-# print(calc_errors((2,2), ANCHORS, distances))
-#imported all the functions from multilateration
-#using distance dictionary found out estiamted position, actual position and position error and printed it 

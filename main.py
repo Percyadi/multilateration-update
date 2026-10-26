@@ -29,7 +29,14 @@ for m in signal_points:
     print(m)
     print()
 
-distance = {}
+
+#Building the distance dictionary
+distances = {}
+
+for m in  signal_points:
+    distances[m.name]=m.wall_aware_distance
+
+
 
 
 # distances = {

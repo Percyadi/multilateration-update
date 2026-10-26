@@ -1,6 +1,7 @@
 
 from geometry import distance
 from scipy.optimize import least_squares
+from config import ANCHORS
 
 distances = {
     "A1": 3.6055,

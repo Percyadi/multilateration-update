@@ -4,6 +4,7 @@ from geometry import count_walls, distance
 from localization import rssi_to_distance_wall_aware, rssi_to_distance
 from measurement import Measurement
 from multilateration import estimate_position, position_error,calc_errors
+import numpy as np
 
 n_samples = 15  
 
@@ -18,6 +19,8 @@ for name, anchor in ANCHORS.items():
 
     rssi_samples[name] = samples
 
+mean = np.mean(samples)
+var = np.var(samples)
 
 
 # measurement array
